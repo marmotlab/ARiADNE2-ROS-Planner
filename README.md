@@ -5,10 +5,15 @@ The paper is still ***under review*** so we do not fully release the code yet.
 However, since some people are interested in our terrian segmentation module, we pre-release this module first.
 It is modified from open-sourced code (check [here](https://github.com/HongbiaoZ/autonomous_exploration_development_environment/blob/noetic/src/terrain_analysis_ext/src/terrainAnalysisExt.cpp)).
 
-**Note:** This module is designed for 2.5D planning, so it can not handle multi-floor environment.
+**Note:** This module is designed for 2.5D planning, so it can not handle multi-floor environments.
+
+<p align="center">
+<img width="640" alt="main1" src="https://github.com/user-attachments/assets/fe5b6dbd-79b9-4abc-be21-ca36f4ddb380" />
+</p>
 
 ## Demo
 
+https://github.com/user-attachments/assets/70f6bb07-0f31-478c-ae21-4e57d38ad9c4
 
 ## Usage
 First, install ROS [Noetic](http://wiki.ros.org/noetic/Installation) and octomap:
