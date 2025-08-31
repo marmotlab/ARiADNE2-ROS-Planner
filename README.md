@@ -1,2 +1,53 @@
 # ARiADNE2-ROS-Planner
-Hierarchical Robot Exploration Planner via Attention Deep Networks in ROS1
+This repository contains the ROS planner for ARiADNE2, which extends our previous work [ARiADNE](https://github.com/marmotlab/ARiADNE-ROS-Planner/tree/main). 
+
+The paper is still ***under review*** so we do not fully release the code yet. 
+However, since some people are interested in our terrian segmentation module, we pre-release this module first.
+It is modified from open-sourced code (check [here](https://github.com/HongbiaoZ/autonomous_exploration_development_environment/blob/noetic/src/terrain_analysis_ext/src/terrainAnalysisExt.cpp)).
+
+**Note:** This module is designed for 2.5D planning, so it can not handle multi-floor environment.
+
+## Demo
+
+
+## Usage
+First, install ROS [Noetic](http://wiki.ros.org/noetic/Installation) and octomap:
+```
+sudo apt-get install ros-noetic-octomap
+```
+Then you can download this repo and compile it.
+```
+git clone https://github.com/marmotlab/ARiADNE2-ROS-Planner.git
+cd ARiADNE2-ROS-Planner
+catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+**Note:** -DCMAKE_BUILD_TYPE=Release is important.
+
+After that, in another workspace, please follow instructions for [CMU Development Environment](https://www.cmu-exploration.com/development-environment) to set up the Gazebo simulation.
+Then you may launch the campus environment:
+```
+source devel/setup.bash 
+roslaunch vehicle_simulator system_campus.launch
+```
+Finally, in another terminal, run:
+```
+source devel/setup.bash 
+roslaunch ariadne2 ariadne2_campus.launch # I commented the planner already
+```
+Move the robot by clicking the waypoint, you should see a sliding grid map in Rviz.
+
+**Note:** If you would like to test it in different environments, please try to tune parameters in terrian_segmentation.launch to get an idle ground segmentation first.
+Besides, this module can not handle negative obstacles, so always be very careful when you deploy it on real robot. We will not be responsible for any damages.
+
+## Author
+[Yuhong Cao](https://www.yuhongcao.online)
+
+## Credit
+[Development environment](https://www.cmu-exploration.com/development-environment) is from CMU.
+
+[Octomap](https://octomap.github.io/) is from University of Freiburg.
+
+[ChatGPT](https://chatgpt.com/) also contributes some code here and there.
+
+
+

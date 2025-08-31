@@ -1,0 +1,48 @@
+<launch>
+<arg name="base_frame" default="sensor"/>
+<arg name="sensor_range" default="20.0"/>
+<arg name="map_resolution" default="0.4"/>
+<arg name="node_resolution" default="2.0"/>
+<arg name="enable_terrain" default="true"/>
+<arg name="only_ground_free" default="false"/>
+
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap" output="log" unless="$(arg enable_terrain)">
+    <remap from="cloud_in" to="sensor_scan"/>
+    <remap from="projected_map" to="grid_map"/>
+    <param name="frame_id" value="map"/>
+    <param name="base_frame_id" value="$(arg base_frame)"/>
+    <param name="resolution" value="$(arg map_resolution)"/>
+    <param name="occupancy_min_z" type="double" value="0.0"/>
+    <param name="occupancy_max_z" type="double" value="1.2"/>
+    <param name="sensor_model/max_range" value="$(arg sensor_range)" />
+    <param name="sensor_model/hit" value="1"/>
+    <param name="sensor_model/miss" value="0.45"/>
+    <param name="sensor_model/max" value="1"/>
+    <param name="sensor_model/min" value="0.2"/>
+    <param name="publish_free_space" value="true"/>
+  </node>
+
+ <include file="$(find ariadne2)/launch/map_handler.launch" if="$(arg enable_terrain)">
+    <arg name="sensor_range" value="$(arg sensor_range)" />
+    <arg name="map_resolution" value="$(arg map_resolution)" />
+    <arg name="only_ground_free" value="$(arg only_ground_free)" />
+ </include>
+
+<!--  <node pkg="ariadne2" type="rl_planner.py" name="ariadne2_planner" output="screen" cwd="node">
+    <param name="publish_graph" type="bool" value="true"/>
+    <param name="node_resolution" value="$(arg node_resolution)"/>
+    <param name="sensor_range" value="$(arg sensor_range)"/>
+    <param name="utility_range_factor" value="0.5"/>
+    <param name="min_utility" type="int" value="3"/>
+    <param name="frontier_downsample_factor" value="1"/>
+    <param name="map_resolution" value="$(arg map_resolution)"/>
+    <param name="global_path_strategy" value="tsp"/>
+    <param name="hard_update_threshold" value="5.0"/>
+    <param name="replanning_frequency" value="1"/>
+    <param name="waypoint_threshold" value="4"/>
+  </node> -->
+
+  <node pkg="tf" type="static_transform_publisher" name="link_broadcaster" args="0 0 0 0 0 0 1 vehicle base_link 100" />
+
+  <node launch-prefix="nice" pkg="rviz" type="rviz" name="rl_rviz" args="-d $(find ariadne2)/rviz/rviz.rviz" respawn="true"/>
+</launch>

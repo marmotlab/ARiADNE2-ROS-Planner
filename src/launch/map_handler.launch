@@ -1,0 +1,29 @@
+<launch>
+<arg name="sensor_range" default="20.0" />
+<arg name="map_resolution" default="0.4" />
+<arg name="only_ground_free" default="false" />
+<arg name="remove_dyn_obs" default="true" />
+<arg name="hit_prob" default="0.95" />
+<arg name="miss_prob" default="0.45" />
+<arg name="use_bounding_box" default="false" />
+
+  <node name="map_handler" pkg="ariadne2" type="map_handler" output="log">
+    <param name="grid_size_m" value="$(eval 6 * arg('sensor_range'))" />
+    <param name="z_range" value="1.0" />              <!-- Z-axis range -->
+    <param name="resolution" value="$(arg map_resolution)" />           <!-- Map resolution -->
+    <param name="sensor_range" value="$(arg sensor_range)" />        <!-- Sensor range -->
+    <param name="only_ground_free" value="$(arg only_ground_free)" />   <!-- Only consider scanned ground as free area -->
+    <param name="remove_dyn_obs" value="$(arg remove_dyn_obs)"/>
+    <param name="obstacle_height_thr" value="0.15" />
+    <param name="hit_probability" value="$(arg hit_prob)" />
+    <param name="miss_probability" value="$(arg miss_prob)" />
+    <param name="use_bounding_box" value="$(arg use_bounding_box)" />
+    <param name="bounding_box_min_x" value="-50.0"/>
+    <param name="bounding_box_max_x" value="300.0"/>
+    <param name="bounding_box_min_y" value="-130.0"/>
+    <param name="bounding_box_max_y" value="150.0"/>
+
+  </node>
+  
+  <include file="$(find ariadne2)/launch/terrain_segmentation.launch" />
+</launch>
