@@ -1,9 +1,17 @@
 # ARiADNE2-ROS-Planner
-This repository contains the ROS planner for ARiADNE2, which extends our previous work [ARiADNE](https://github.com/marmotlab/ARiADNE-ROS-Planner/tree/main). 
+This repository provides the ROS planner for **HEADER**, which was originally named **ARiADNE2** since it extends our previous work [ARiADNE](https://github.com/marmotlab/ARiADNE-ROS-Planner/tree/main). 
 
 The paper is still ***under review*** so we do not fully release the code yet. 
 However, since some people are interested in our terrian segmentation module, we pre-release this module first.
 It is modified from open-sourced code (check [here](https://github.com/HongbiaoZ/autonomous_exploration_development_environment/blob/noetic/src/terrain_analysis_ext/src/terrainAnalysisExt.cpp)).
+
+
+**News:**
+
+**20 Oct 2025** A short version of HEADER was presented at the IROS2025 [active perception workshop](https://activep-ws.github.io/index.html), and it won the Best Paper Award!
+
+**17 Oct 2025** The [preprint version](https://arxiv.org/pdf/2510.15679) of HEADER is available on arxiv!
+
 
 **Note:** This module is designed for 2.5D planning, so it can not handle multi-floor environments.
 
